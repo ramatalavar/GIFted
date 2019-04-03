@@ -1,10 +1,6 @@
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
-
 export class API {
   constructor() {
-    this.apiKey = publicRuntimeConfig.API_KEY;
+    this.apiKey = "T2pT6xr6DtV3Q9SSXBJRHiQyK7gYTHJc";
     this.baseURL = "api.giphy.com/v1/gifs/search";
   }
 
