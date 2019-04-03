@@ -1,10 +1,20 @@
 import React, { PureComponent } from "react";
+import ThemeSwitch from "react-switch";
 
 class Search extends PureComponent {
   render() {
-    const { query, handleSearch } = this.props;
+    const { query, handleSearch, onChangeTheme, isLightTheme } = this.props;
     return (
       <div className="header">
+        <div className="theme-switch">
+          <div>Theme: {isLightTheme ? "Light" : "Dark"}</div>
+          <ThemeSwitch
+            onChange={onChangeTheme}
+            checked={isLightTheme}
+            uncheckedIcon={false}
+            checkedIcon={false}
+          />
+        </div>
         <h2>Welcome to GIFted.</h2>
         <p>To search for GIFs type the keyword below</p>
         <input
@@ -19,6 +29,10 @@ class Search extends PureComponent {
           .header {
             display: inline-flex;
             flex-direction: column;
+          }
+
+          .theme-switch {
+            text-align: right;
           }
 
           .header input {

@@ -25,7 +25,6 @@ class InfiniteScroller extends PureComponent {
 
   handleScroll = () => {
     let { isFetching, hasMore } = this.props;
-    debugger;
     if (!isFetching && hasMore && this.isNearBottom()) {
       this.props.fetchMore(this.state.lastScrollPos, false); // pass the current scroll position of the container
     }

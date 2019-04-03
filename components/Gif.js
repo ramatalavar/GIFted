@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from "react";
 
 class Gif extends PureComponent {
   render() {
-    const { url, title, status, id } = this.props;
+    const { url, title, status, id, light } = this.props;
     return (
       <Fragment>
         <figure>
@@ -22,6 +22,7 @@ class Gif extends PureComponent {
 
           img {
             cursor: pointer;
+            border: ${light ? "none" : "1px solid #ccc"};
           }
 
           @media screen and (max-width: 420px) {
