@@ -38,6 +38,7 @@ class Home extends Component {
   };
 
   fetchGifs = async (scrollTop = null, reset = true) => {
+    this.setState({ isLoading: true });
     const { offset, limit, query } = this.state;
     const keywords = query.split(" ").join("+");
     const gifResponse = await this.apiInstance.fetchGifs(
@@ -77,12 +78,10 @@ class Home extends Component {
   handleSearch = e => {
     const { value } = e.target;
     this.setState(
-      prevState => ({
-        ...prevState,
-        query: value,
-        isLoading: true
-      }),
-      () => this.debunceFunction()
+      {
+        query: value
+      },
+      this.debunceFunction
     );
   };
 
@@ -107,7 +106,7 @@ class Home extends Component {
     });
   };
 
-  getContent = () => {
+  getContent = light => {
     const { gifs, isLoading } = this.state;
     if (!isLoading && !gifs.length) {
       return <div className="empty">No GIFs to show</div>;
@@ -115,10 +114,23 @@ class Home extends Component {
       return gifs.map(gif => {
         const { gifUrl, id, status, title } = gif;
         return (
-          <Gif key={id} url={gifUrl} title={title} status={status} id={id} />
+          <Gif
+            light={light}
+            key={id}
+            url={gifUrl}
+            title={title}
+            status={status}
+            id={id}
+          />
         );
       });
     }
+  };
+
+  handleThemeSwitch = checked => {
+    this.setState({
+      theme: checked ? "light" : "dark"
+    });
   };
 
   render() {
@@ -129,9 +141,14 @@ class Home extends Component {
     return (
       <div ref={el => (this.scrollableTo = el)} className="app-container">
         <Header />
-        <Search query={query} handleSearch={this.handleSearch} />
+        <Search
+          isLightTheme={isLightTheme}
+          query={query}
+          handleSearch={this.handleSearch}
+          onChangeTheme={this.handleThemeSwitch}
+        />
         <div className="gif-cotainer" onClick={this.handlePlayPause}>
-          {this.getContent()}
+          {this.getContent(isLightTheme)}
         </div>
         <InfiniteScroller
           hasMore={hasMore}
