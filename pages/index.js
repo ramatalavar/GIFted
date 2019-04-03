@@ -138,7 +138,6 @@ class Home extends Component {
           isFetching={isLoading}
           fetchMore={this.fetchGifs}
         />
-        <OfflineSupport />
         <style jsx>{`
           :global(body) {
             margin: 0;
