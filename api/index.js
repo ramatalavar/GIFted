@@ -1,12 +1,16 @@
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
+
 export class API {
   constructor() {
-    this.apiKey = "T2pT6xr6DtV3Q9SSXBJRHiQyK7gYTHJc";
-    this.baseURL = "api.giphy.com/v1/gifs/search";
+    this.apiKey = publicRuntimeConfig.API_KEY;
+    this.baseURL = `${location.protocol}//api.giphy.com/v1/gifs/search`;
   }
 
   fetchGifs(keyword, limit, offset) {
     var myRequest = new Request(
-      `http://${this.baseURL}?api_key=${
+      `${this.baseURL}?api_key=${
         this.apiKey
       }&q=${keyword}&limit=${limit}&offset=${offset}`
     );

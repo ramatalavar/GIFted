@@ -1,5 +1,8 @@
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 module.exports = {
+  publicRuntimeConfig: {
+    API_KEY: "T2pT6xr6DtV3Q9SSXBJRHiQyK7gYTHJc"
+  },
   webpack: config => {
     config.plugins.push(
       new SWPrecacheWebpackPlugin({
